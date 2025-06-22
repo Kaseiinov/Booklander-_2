@@ -1,5 +1,7 @@
 package kg.attractor.java.lesson44;
 
+import kg.attractor.java.server.models.BorrowedBooks;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,7 @@ public class SampleDataModel {
         private String middleName = null;
         private boolean emailConfirmed = false;
         private String email;
+        private BorrowedBooks borrowedBooks;
 
         public User(String firstName) {
             this(firstName, null, null);
@@ -60,6 +63,14 @@ public class SampleDataModel {
             this.lastName = lastName;
             this.middleName = middleName;
             this.email = firstName+"@test.mail";
+        }
+
+        public BorrowedBooks getBorrowedBooks() {
+            return borrowedBooks;
+        }
+
+        public void setBorrowedBooks(BorrowedBooks borrowedBooks) {
+            this.borrowedBooks = borrowedBooks;
         }
 
         public String getFirstName() {
