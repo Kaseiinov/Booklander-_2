@@ -36,11 +36,12 @@ public class JsonUtils {
         return books;
     }
 
-    public SampleDataModel.User[] readUsers() throws FileNotFoundException {
+    public List<SampleDataModel.User> readUsers() throws FileNotFoundException {
         JsonReader reader = new JsonReader(new FileReader(dir + "users.json"));
 
-        SampleDataModel.User[] users = gson.fromJson(reader, SampleDataModel.User[].class);
-
+        Type listType = new TypeToken<List<SampleDataModel.User>>(){}.getType();
+        List<SampleDataModel.User> users = gson.fromJson(reader, listType);
+        users.forEach(user -> System.out.println(user.getEmail()));
         return users;
     }
 }
