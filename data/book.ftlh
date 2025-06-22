@@ -22,14 +22,19 @@
         </tr>
         </thead>
         <tbody class="table-group-divider">
-        <#if books?? >
+        <#if book?? >
             <tr>
-                <th scope="row"></th>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Mark</td>
+                <th scope="row">${book.name}</th>
+                <td>${book.description}</td>
+                <td>${book.author}</td>
+                <td>${book.releaseYear}</td>
+                <td>
+                    <#if book.borrowedBy??>
+                        ${book.borrowed.name}
+                    <#else>
+                        Not
+                    </#if>
+                </td>
             </tr>
         </#if>
         </tbody>

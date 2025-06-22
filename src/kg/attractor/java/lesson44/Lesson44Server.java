@@ -24,7 +24,7 @@ public class Lesson44Server extends BasicServer {
         super(host, port);
         registerGet("/sample", this::freemarkerSampleHandler);
         registerGet("/books", this::freemarkerBooksHandler);
-//        registerGet("/book", this::freemarkerBookHandler);
+        registerGet("/books/book", this::freemarkerBookHandler);
     }
 
     private static Configuration initFreeMarker() {
@@ -56,9 +56,9 @@ public class Lesson44Server extends BasicServer {
         renderTemplate(exchange, "books.ftlh", getBooksDataModel());
     }
 
-//    private void freemarkerBookHandler(HttpExchange exchange) {
-//        renderTemplate(exchange, "book.ftlh", getBookDataModel());
-//    }
+    private void freemarkerBookHandler(HttpExchange exchange) {
+        renderTemplate(exchange, "book.ftlh", getBookDataModel());
+    }
 
     protected void renderTemplate(HttpExchange exchange, String templateFile, Object dataModel) {
         try {
@@ -108,7 +108,7 @@ public class Lesson44Server extends BasicServer {
         return books;
     }
 
-    private Map<String, Book> getBookDataModel(Long id) {
+    private Map<String, Book> getBookDataModel() {
         JsonUtils json = new JsonUtils();
         List<Book> books = new ArrayList<>();
         try{
@@ -117,12 +117,8 @@ public class Lesson44Server extends BasicServer {
             e.printStackTrace();
         }
 
-        Book book = new Book();
-        for(Book b : books){
-            if (b.getId().equals(id)){
-                book = b;
-            }
-        }
+        Book book = books.getFirst();
+
         Map<String, Book> bookMap = new HashMap<>();
         bookMap.put("book", book);
         return bookMap;
