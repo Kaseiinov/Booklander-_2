@@ -1,5 +1,6 @@
 package kg.attractor.java.lesson44;
 
+import com.google.gson.annotations.Expose;
 import kg.attractor.java.server.models.BorrowedBooks;
 
 import java.time.LocalDateTime;
@@ -43,10 +44,13 @@ public class SampleDataModel {
     }
 
     public static class User {
+        @Expose
         private String firstName;
+        @Expose
         private String lastName;
         private String middleName = null;
         private boolean emailConfirmed = false;
+        @Expose
         private String email;
         private BorrowedBooks borrowedBooks;
 
