@@ -19,6 +19,14 @@ public class Book {
     @Expose
     private SampleDataModel.User borrowedBy;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public SampleDataModel.User getBorrowedBy() {
         return borrowedBy;
     }

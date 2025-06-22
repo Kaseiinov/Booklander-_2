@@ -12,6 +12,7 @@ import kg.attractor.java.server.models.Book;
 import kg.attractor.java.utils.JsonUtils;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class Lesson44Server extends BasicServer {
         super(host, port);
         registerGet("/sample", this::freemarkerSampleHandler);
         registerGet("/books", this::freemarkerBooksHandler);
+//        registerGet("/book", this::freemarkerBookHandler);
     }
 
     private static Configuration initFreeMarker() {
@@ -53,6 +55,10 @@ public class Lesson44Server extends BasicServer {
     private void freemarkerBooksHandler(HttpExchange exchange) {
         renderTemplate(exchange, "books.ftlh", getBooksDataModel());
     }
+
+//    private void freemarkerBookHandler(HttpExchange exchange) {
+//        renderTemplate(exchange, "book.ftlh", getBookDataModel());
+//    }
 
     protected void renderTemplate(HttpExchange exchange, String templateFile, Object dataModel) {
         try {
@@ -100,5 +106,25 @@ public class Lesson44Server extends BasicServer {
             e.printStackTrace();
         }
         return books;
+    }
+
+    private Map<String, Book> getBookDataModel(Long id) {
+        JsonUtils json = new JsonUtils();
+        List<Book> books = new ArrayList<>();
+        try{
+            books.addAll(json.readBooks());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Book book = new Book();
+        for(Book b : books){
+            if (b.getId().equals(id)){
+                book = b;
+            }
+        }
+        Map<String, Book> bookMap = new HashMap<>();
+        bookMap.put("book", book);
+        return bookMap;
     }
 }
