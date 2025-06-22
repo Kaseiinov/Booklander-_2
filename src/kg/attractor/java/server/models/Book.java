@@ -1,15 +1,22 @@
 package kg.attractor.java.server.models;
 
+import com.google.gson.annotations.Expose;
 import kg.attractor.java.lesson44.SampleDataModel;
 
 import java.time.LocalDate;
 
 public class Book {
+    @Expose
     private Long id;
+    @Expose
     private String name;
+    @Expose
     private String author;
+    @Expose
     private String description;
+    @Expose
     private LocalDate releaseYear;
+    @Expose
     private SampleDataModel.User borrowedBy;
 
     public SampleDataModel.User getBorrowedBy() {
