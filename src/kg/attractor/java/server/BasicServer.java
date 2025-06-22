@@ -3,6 +3,7 @@ package kg.attractor.java.server;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.file.Files;
@@ -59,6 +60,7 @@ public abstract class BasicServer {
         // именно этот обработчик отвечает что отображать,
         // когда пользователь запрашивает localhost:9889
         registerGet("/", exchange -> sendFile(exchange, makeFilePath("index.html"), ContentType.TEXT_HTML));
+        registerGet("/books", exchange -> sendFile(exchange, makeFilePath("books.ftlh"), ContentType.TEXT_HTML));
 
         // эти обрабатывают запросы с указанными расширениями
         registerFileHandler(".css", ContentType.TEXT_CSS);
@@ -120,7 +122,7 @@ public abstract class BasicServer {
         }
     }
 
-    private void handleIncomingServerRequests(HttpExchange exchange) {
+    private void handleIncomingServerRequests(HttpExchange exchange) throws FileNotFoundException {
         var route = getRoutes().getOrDefault(makeKey(exchange), this::respond404);
         route.handle(exchange);
     }

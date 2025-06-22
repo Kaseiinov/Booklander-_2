@@ -24,10 +24,16 @@
         <#if books?? >
             <#list books as book>
                 <tr>
-                    <th scope="row"></th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <th scope="row">${book.name}</th>
+                    <td>${book.author}</td>
+                    <td>${book.releaseYear}</td>
+                    <td>
+                        <#if book.borrowedBy??>
+                            ${book.borrowed.name}
+                        <#else>
+                            Not
+                        </#if>
+                    </td>
                 </tr>
             </#list>
         </#if>

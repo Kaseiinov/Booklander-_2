@@ -32,7 +32,6 @@ public class JsonUtils {
 
         Type listType = new TypeToken<List<Book>>(){}.getType();
         List<Book> books = gson.fromJson(reader, listType);
-        books.forEach(book -> System.out.println(book.getName()));
         return books;
     }
 
@@ -41,7 +40,6 @@ public class JsonUtils {
 
         Type listType = new TypeToken<List<SampleDataModel.User>>(){}.getType();
         List<SampleDataModel.User> users = gson.fromJson(reader, listType);
-        users.forEach(user -> System.out.println(user.getEmail()));
         return users;
     }
 }
