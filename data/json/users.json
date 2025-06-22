@@ -1,0 +1,54 @@
+[
+  {
+    "firstName": "Marco",
+    "lastName": "Inaros",
+    "email": "marco@test.mail",
+    "borrowedBooks": {
+      "borrowedBooks": [2],
+      "borrowedDate": "2023-10-15",
+      "returnDate": "2023-11-15"
+    }
+  },
+  {
+    "firstName": "Winston",
+    "lastName": "Duarte",
+    "email": "winston@test.mail",
+    "borrowedBooks": {
+      "borrowedBooks": [3],
+      "borrowedDate": "2023-10-20",
+      "returnDate": "2023-11-20"
+    }
+  },
+  {
+    "firstName": "Amos",
+    "lastName": "Burton",
+    "middleName": "'Timmy'",
+    "email": "amos@test.mail",
+    "borrowedBooks": {
+      "borrowedBooks": [5],
+      "borrowedDate": "2023-10-18",
+      "returnDate": "2023-11-18"
+    }
+  },
+  {
+    "firstName": "Naomi",
+    "lastName": "Nagata",
+    "email": "naomi@test.mail",
+    "borrowedBooks": {
+      "borrowedBooks": [8],
+      "borrowedDate": "2023-10-22",
+      "returnDate": "2023-11-22"
+    }
+  },
+  {
+    "firstName": "James",
+    "lastName": "Holden",
+    "middleName": "R.",
+    "email": "james@test.mail",
+    "borrowedBooks": {
+      "borrowedBooks": [7, 10],
+      "borrowedDate": "2023-10-25",
+      "returnDate": "2023-11-25"
+    }
+  }
+]

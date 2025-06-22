@@ -5,6 +5,7 @@ import kg.attractor.java.lesson44.SampleDataModel;
 import java.time.LocalDate;
 
 public class Book {
+    private Long id;
     private String name;
     private String author;
     private String description;
