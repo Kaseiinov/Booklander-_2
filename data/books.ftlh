@@ -17,7 +17,7 @@
             <th scope="col">Author</th>
             <th scope="col">Release year</th>
             <th scope="col">Is borrowed?</th>
-
+            <th scope="col">Additional information</th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -34,6 +34,7 @@
                             Not
                         </#if>
                     </td>
+                    <td><a class="btn btn-outline-info" href="http://localhost:8080/books/book">More</a></td>
                 </tr>
             </#list>
         </#if>
