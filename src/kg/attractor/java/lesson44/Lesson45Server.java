@@ -19,7 +19,7 @@ public class Lesson45Server extends Lesson44Server {
 
     public Lesson45Server(String host, int port) throws IOException {
         super(host, port);
-        registerGet("/login", this::loginGet);
+        registerGet("/login", this::loginGetFreemarkerhandler);
         registerPost("/login", this::loginPost);
         registerGet("/register", this::registerGet);
         registerPost("/register", this::registerPost);
@@ -64,15 +64,15 @@ public class Lesson45Server extends Lesson44Server {
         sendFile(exchange, path, ContentType.TEXT_HTML);
     }
 
-    private void loginGet(HttpExchange exchange){
+    private void loginGetFreemarkerhandler(HttpExchange exchange) {
+        Map<String, String> responseData = new HashMap<>();
         URI uri = exchange.getRequestURI();
-        if(uri.getQuery() != null){
-            Map<String, String> response = Utils.parseUrlEncoded(uri.getQuery(), "&");;
-            renderTemplate(exchange, "login.ftlh", response);
-            return;
+
+        if (uri.getQuery() != null) {
+            responseData = Utils.parseUrlEncoded(uri.getQuery(), "&");
         }
-        Path path = makeFilePath("login.ftlh");
-        sendFile(exchange, path, ContentType.TEXT_HTML);
+
+        renderTemplate(exchange, "login.ftlh", responseData);
     }
 
     private void loginPost(HttpExchange exchange) {
