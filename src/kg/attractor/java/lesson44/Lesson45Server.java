@@ -10,6 +10,7 @@ import kg.attractor.java.utils.Utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Path;
 import java.util.*;
 
@@ -64,12 +65,17 @@ public class Lesson45Server extends Lesson44Server {
     }
 
     private void loginGet(HttpExchange exchange){
+        URI uri = exchange.getRequestURI();
+        if(uri.getQuery() != null){
+            Map<String, String> response = Utils.parseUrlEncoded(uri.getQuery(), "&");;
+            renderTemplate(exchange, "login.ftlh", response);
+            return;
+        }
         Path path = makeFilePath("login.ftlh");
         sendFile(exchange, path, ContentType.TEXT_HTML);
     }
 
     private void loginPost(HttpExchange exchange) {
-        String cType = getContentType(exchange);
         String raw = getBody(exchange);
         Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
 
@@ -80,10 +86,10 @@ public class Lesson45Server extends Lesson44Server {
                 loggedUser = user;
                 redirect(exchange, "/profile");
             }else {
-                redirect(exchange, "/login");
+                redirect(exchange, "/login?response=Incorrect password");
             }
         }else{
-            redirect(exchange, "/login");
+            redirect(exchange, "/login?response=User not found");
         }
 
     }

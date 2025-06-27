@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Login form</title>
     <link rel="stylesheet" href="css/forms.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -22,6 +24,11 @@
                 <div class="form-element">
                     <label for="user-password">password</label>
                     <input type="password" name="user-password" id="user-password" placeholder="your password" required>
+                </div>
+                <div class="error text-danger text-center fw-bold mt-3">
+                    <#if response??>
+                        <span>${response}</span>
+                    </#if>
                 </div>
                 <div class="hr-line">
                     <span class="details">one more step to go</span>

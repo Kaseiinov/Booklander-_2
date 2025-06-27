@@ -10,6 +10,8 @@
 </head>
 <body>
 <div class="container">
+    <h1 class="text-center">User profile</h1>
+
     <div class="card mt-4">
         <div class="card-body">
             <h4 class="card-title">User email -> <b>${user.email!"User email"}</b></h4>
