@@ -2,7 +2,12 @@ package kg.attractor.java.server.models;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
+    private static List<User> users = new ArrayList<>();
+
     private Long id;
     @Expose
     private String firstName;
@@ -19,6 +24,17 @@ public class User {
         this.email = email;
         this.password = password;
         this.borrowedBooks = borrowedBooks;
+    }
+
+    public User() {
+    }
+
+    public static List<User> getUsers() {
+        return users;
+    }
+
+    public static void setUsers(List<User> users) {
+        User.users = users;
     }
 
     public Long getId() {
@@ -68,4 +84,18 @@ public class User {
     public void setBorrowedBooks(BorrowedBooks borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return email != null && email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return email != null ? email.hashCode() : 0;
+    }
+
 }

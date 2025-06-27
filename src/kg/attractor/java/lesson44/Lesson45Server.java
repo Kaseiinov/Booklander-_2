@@ -3,10 +3,12 @@ package kg.attractor.java.lesson44;
 import com.sun.net.httpserver.HttpExchange;
 import kg.attractor.java.server.ContentType;
 import kg.attractor.java.server.ResponseCodes;
+import kg.attractor.java.server.models.User;
 import kg.attractor.java.utils.Utils;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Map;
 
 public class Lesson45Server extends Lesson44Server {
@@ -22,9 +24,23 @@ public class Lesson45Server extends Lesson44Server {
     private void registerPost(HttpExchange exchange) {
         String raw = getBody(exchange);
         Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
+        User newUser = new User();
+        newUser.setEmail(parsed.get("email"));
+        newUser.setPassword(parsed.get("user-password"));
+        newUser.setFirstName(parsed.get("user-firstName"));
+        newUser.setLastName(parsed.get("user-lastName"));
 
-        SampleDataModel users = new SampleDataModel();
-        users.getCustomers().contains()
+        if(User.getUsers().contains(newUser)){
+            String fmt = "%s -> user with that email already registered! " +
+                    "%s -> code response";
+            sendResponse(exchange, fmt, newUser.getEmail(), ResponseCodes.CONFLICT.getCode());
+        } else{
+            User.getUsers().add(newUser);
+            String fmt = "%s -> user with that email successfully registered! " +
+                    "%s -> code response";
+            sendResponse(exchange, fmt, newUser.getEmail(), ResponseCodes.OK.getCode());
+        }
+        User.getUsers().forEach(e -> System.out.println("registered -> " + e.getEmail()));
     }
 
     private void registerGet(HttpExchange exchange){
@@ -57,5 +73,15 @@ public class Lesson45Server extends Lesson44Server {
 
         redirect(exchange, "/");
 
+    }
+
+    public void sendResponse(HttpExchange exchange, String fmt, String value, int code){
+        String data = String.format(fmt, value, code);
+        try {
+            sendByteData(exchange, ResponseCodes.OK,
+                    ContentType.TEXT_HTML, data.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
