@@ -15,6 +15,21 @@ public class Lesson45Server extends Lesson44Server {
         super(host, port);
         registerGet("/login", this::loginGet);
         registerPost("/login", this::loginPost);
+        registerGet("/register", this::registerGet);
+        registerPost("/register", this::registerPost);
+    }
+
+    private void registerPost(HttpExchange exchange) {
+        String raw = getBody(exchange);
+        Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
+
+        SampleDataModel users = new SampleDataModel();
+        users.getCustomers().contains()
+    }
+
+    private void registerGet(HttpExchange exchange){
+        Path path = makeFilePath("register.ftlh");
+        sendFile(exchange, path, ContentType.TEXT_HTML);
     }
 
     private void loginGet(HttpExchange exchange){

@@ -69,6 +69,7 @@ public class SampleDataModel {
             this.email = firstName+"@test.mail";
         }
 
+
         public BorrowedBooks getBorrowedBooks() {
             return borrowedBooks;
         }
