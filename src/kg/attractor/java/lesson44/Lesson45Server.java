@@ -32,7 +32,8 @@ public class Lesson45Server extends Lesson44Server {
 
         if(User.getUsers().contains(newUser)){
             String fmt = "%s -> user with that email already registered! " +
-                    "%s -> code response";
+                    "%s -> code response " +
+                    "<a href='/register'>try again</a>";
             sendResponse(exchange, fmt, newUser.getEmail(), ResponseCodes.CONFLICT.getCode());
         } else{
             User.getUsers().add(newUser);
